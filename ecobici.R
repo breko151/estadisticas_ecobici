@@ -43,6 +43,26 @@ histogramas <- function(datos) {
 
 
 #Cambios Yael
+estudioEdad<-function(datos){    #Conocer a que sector de personas es mas usado el servicio
+ mediaEdad<-mean(datos[,"Edad_Usuario"]) #Promedio de edad que usa ecobici
+ varEdad<-var(datos[,"Edad_Usuario"])    #variabilidad de la edad respecto a la media
+ desEstanEdad<-sqrt(varEdad)             #Que tan separados estan los datos respecto a la media
+ edadOrdenado <- sort (datos[,"Edad_Usuario"])
+ #Deciles
+  
+ #cuartiles
+ cuartilesEdad<-quantile(edadOrdenado)
+ #Moda La edad que usa mas ecobicis
+ modaEdad<-mfv(edadOrdenado)#Moda
+}
+
+
+estudioEdadGenero<-function(datos){
+ #Calculo de la covarianza
+
+
+}
+
 
 
 main()
