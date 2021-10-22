@@ -41,4 +41,8 @@ histogramas <- function(datos) {
   barplot(table(datos$Genero_Usuario))
 }
 
+
+#Cambios Yael
+
+
 main()
