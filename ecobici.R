@@ -55,6 +55,10 @@ calculoTiempo<- function (datos){ ######Nuevo
   datos[,"Hora_Retiro"]<-hms(datos[,"Hora_Retiro"])
   datos[,"Hora_Arribo"]<-hms(datos[,"Hora_Arribo"])
   datos$tiempoTotal<-datos$Hora_Arribo - datos$Hora_Retiro
+  
+  datos$tiempoTotal<-as.duration(datos$tiempoTotal)
+  datos$tiempoTotal <-  as.numeric(datos$tiempoTotal, "minutes")
+  
   datos
   }
 
