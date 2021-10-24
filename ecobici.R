@@ -58,7 +58,8 @@ calculoTiempo<- function (datos){ ######Nuevo
   
   datos$tiempoTotal<-as.duration(datos$tiempoTotal)
   datos$tiempoTotal <-  as.numeric(datos$tiempoTotal, "minutes")
-  
+  datos$tiempoTotal<-ceiling(datos$tiempoTotal) #Redondeo
+ 
   datos
   }
 
