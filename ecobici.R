@@ -9,6 +9,11 @@ main <- function() {
   info_datos(datos)
   #Graficamos datos individuales.
   histogramas(datos)
+  
+  ####cambios Yael
+  #Calculo de tiempo de uso 
+  datos<-calculoTiempo(datos)
+  View(datos)
 }
 
 obtencion_datos <- function() {
@@ -43,26 +48,51 @@ histogramas <- function(datos) {
 
 
 #Cambios Yael
+
+calculoTiempo<- function (datos){ ######Nuevo
+  #install.package(lubridate)
+  library(lubridate)
+  datos[,"Hora_Retiro"]<-hms(datos[,"Hora_Retiro"])
+  datos[,"Hora_Arribo"]<-hms(datos[,"Hora_Arribo"])
+  datos$tiempoTotal<-datos$Hora_Arribo - datos$Hora_Retiro
+  datos
+  }
+
+estudioGenero <- function(datos) {
+  genero <- datos[ ,"Genero_Usuario"] 
+  numHombres <- sum(genero == "M")  #Numero de Hombres
+  numMujeres <- sum(genero == "F")  #Numero de Mujeres
+}
+
 estudioEdad<-function(datos){    #Conocer a que sector de personas es mas usado el servicio
+ #Media aritmetica
  mediaEdad<-mean(datos[,"Edad_Usuario"]) #Promedio de edad que usa ecobici
+ #Varianza
  varEdad<-var(datos[,"Edad_Usuario"])    #variabilidad de la edad respecto a la media
+ #Desviacion estandar
  desEstanEdad<-sqrt(varEdad)             #Que tan separados estan los datos respecto a la media
  edadOrdenado <- sort (datos[,"Edad_Usuario"])
- #Deciles
-  
- #cuartiles
+ #Cuartiles
  cuartilesEdad<-quantile(edadOrdenado)
  #Moda La edad que usa mas ecobicis
  modaEdad<-mfv(edadOrdenado)#Moda
 }
 
-
 estudioEdadGenero<-function(datos){
- #Calculo de la covarianza
-
+#Calculo de la covarianza
+  dataEdadGenero<-data.frame(datos[ ,c("Genero_Usuario","Edad_Usuario")])
+#Covarianza Grado de dispersión de la edad y fgenerp con respecto a la media  
+  covarianza <- cov(datos$Genero_Usuario,datos$Edad_Usuario)
+  matCovarianza <- cov(dataEdadGenero)
+#coeficiente de correlación
+  coeR <- cor(DataEdadGenero,method="pearson","spearman","kendall" )
+#Correlacion 2
+  correlacion<-cor(dataEdadGenero,method="pearson")
+  library (psych)
+  pairs.panel(dataEdadGenero,method="pearson") 
+  ggcorrplot(correlacion ,method = "circle")
+  coefCor <- corr.test(datos$Genero_Usuario,datos$Edad_Usuario,method="pearson",adjust=none)
 
 }
-
-
 
 main()
