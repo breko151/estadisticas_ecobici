@@ -11,7 +11,7 @@ main <- function() {
   info_datos(datos)
   #Graficamos datos individuales.
   # histogramas(datos)
-  #Obtencion datos estad�sticos.
+  #Obtencion datos estadísticos.
     #Descripcion datos categoricos.
   descripcion(datos)
     #Medidas de tendencia central.
@@ -208,4 +208,20 @@ dispersion <- function(datos) {
   
 }
 
+
+estudioEdadTiempo<- function (datos){
+  library("nortest")
+  library("ggplot2")
+  library("ggcorrplot")
+  plot(datos$tiempoTotal~datos$Edad_Usuario, 
+       main="Relacion Edad y Tiempo de Uso",
+       xlab="Edad Usuario",ylab="Tiempo de Uso",
+       xlim=c(15,80),ylim=c(1,650),xasx="i",yasx="i",col="red",pch=3)
+  
+  qqnorm(datos$Edad_Usuario,col = "steelblue",lwd=2)  #diagrama de dispersión entre las variables
+  qqline(datos$Edad_Usuario,col = "steelblue",lwd=2)  #Valor esperado o media 
+  qqnorm(datos$tiempoTotal,col = "steelblue",lwd=2)  #diagrama de dispersión entre las variables
+  qqline(datos$tiempoTotal,col = "steelblue",lwd=2)  #Valor esperado o media 
+  
+}
 main()
