@@ -209,7 +209,7 @@ dispersion <- function(datos) {
 }
 
 
-estudioEdadTiempo<- function (datos){
+covarianza<- function (datos){
   library("nortest")
   library("ggplot2")
   library("ggcorrplot")
