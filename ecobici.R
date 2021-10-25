@@ -19,7 +19,7 @@ main <- function() {
     #Medidas de posicion.
   posicion(datos)
     #Medidas de dispersion.
-  dispersion(datos)
+  # dispersion(datos)
 }
 
 obtencion_datos <- function() {
@@ -205,37 +205,28 @@ posicion <- function(datos) {
 }
 
 dispersion <- function(datos) {
-  #Importamos la libreria modeest.
-  library(modeest)
-  print("Medidas de Dispersion")
-  #Medidas de Tendencia Central de Edad Usuario.
-  cat("\tEdad del Usuario\n")
-  cat("\t\tEl Rango es:", max(datos$Edad_Usuario, na.rm = TRUE) - min(datos$Edad_Usuario, na.rm = TRUE), "\n")
-  cat("\t\tLa Varianza es:", var(datos$Edad_Usuario, na.rm = TRUE), "\n")
-  cat("\t\tLa Desviacion Estandar es:", sd(datos$Edad_Usuario, na.rm = TRUE), "\n")
-  cat("\t\tEl Coeficiente es:", sd(datos$Edad_Usuario) / mean(datos$Edad_Usuario) * 100, "\n")
-  #Medidas de Tendencia Central del Tiempo Total.
-  cat("\tTiempo Total\n")
-  cat("\t\tEl Rango es:", max(datos$Tiempo_Total, na.rm = TRUE) - min(datos$Tiempo_Total, na.rm = TRUE), "\n")
-  cat("\t\tLa Varianza es:", var(datos$Tiempo_Total, na.rm = TRUE), "\n")
-  cat("\t\tLa Desviacion Estandar es:", sd(datos$Tiempo_Total, na.rm = TRUE), "\n")
-  cat("\t\tEl Coeficiente es:", sd(datos$Tiempo_Total) / mean(datos$Tiempo_Total) * 100, "\n")
+  
 }
 
-covarianza<- function (datos){
+
+normalidad<- function (datos){
   library("nortest")
   library("ggplot2")
   library("ggcorrplot")
+  
+  lillie.test(datos$tiempoTotal)  #No cumplen una distribucion normal
+  lillie.test(datos$Edad_Usuario) #No cumplen una distribucion normal
+  
   plot(datos$tiempoTotal~datos$Edad_Usuario, 
        main="Relacion Edad y Tiempo de Uso",
        xlab="Edad Usuario",ylab="Tiempo de Uso",
        xlim=c(15,80),ylim=c(1,650),xasx="i",yasx="i",col="red",pch=3)
   
-  qqnorm(datos$Edad_Usuario,col = "steelblue",lwd=2)  #diagrama de dispersión entre las variables
-  qqline(datos$Edad_Usuario,col = "steelblue",lwd=2)  #Valor esperado o media 
-  qqnorm(datos$tiempoTotal,col = "steelblue",lwd=2)  #diagrama de dispersión entre las variables
-  qqline(datos$tiempoTotal,col = "steelblue",lwd=2)  #Valor esperado o media 
+  
+  qqnorm(datos$Edad_Usuario,col = "steelblue",lwd=2)  
+  qqline(datos$Edad_Usuario,col = "steelblue",lwd=2)  
+  qqnorm(datos$tiempoTotal,col = "steelblue",lwd=2)  
+  qqline(datos$tiempoTotal,col = "steelblue",lwd=2)  
   
 }
-
 main()
