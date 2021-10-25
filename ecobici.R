@@ -1,3 +1,8 @@
+#Proyecto segundo departamental 
+#Unidad de aprendizaje: Programación para ciencia de datos
+#Equipo 4: Castro Guillen Yael Michael - Suárez Pérez Juan Pablo
+#Analisis de Servicio de Ecobici CDMX
+
 main <- function() {
   #Importamos los datos.
   datos <- obtencion_datos()
