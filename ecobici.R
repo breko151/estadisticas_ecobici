@@ -240,5 +240,11 @@ normalidad<- function (datos){
   qqnorm(datos$tiempoTotal,col = "steelblue",lwd=2)  
   qqline(datos$tiempoTotal,col = "steelblue",lwd=2)  
   
+  library(psych)
+  data<-data.frame(datos$Edad_Usuario,datos$tiempoTotal)
+  pairs.panels(data,method = "kendall")
+  
+  coeR <- cor(data,method = "kendall") #coeficiente de correlación 
+    print(coeR)
 }
 main()
