@@ -20,6 +20,8 @@ main <- function() {
   posicion(datos)
     #Medidas de dispersion.
   dispersion(datos)
+  #Grafica Dispersion
+  covarianza(datos)
 }
 
 obtencion_datos <- function() {
@@ -208,13 +210,13 @@ dispersion <- function(datos) {
   #Importamos la libreria modeest.
   library(modeest)
   print("Medidas de Dispersion")
-  #Medidas de Tendencia Central de Edad Usuario.
+  #Medidas de Dispersion de Edad Usuario.
   cat("\tEdad del Usuario\n")
   cat("\t\tEl Rango es:", max(datos$Edad_Usuario, na.rm = TRUE) - min(datos$Edad_Usuario, na.rm = TRUE), "\n")
   cat("\t\tLa Varianza es:", var(datos$Edad_Usuario, na.rm = TRUE), "\n")
   cat("\t\tLa Desviacion Estandar es:", sd(datos$Edad_Usuario, na.rm = TRUE), "\n")
   cat("\t\tEl Coeficiente es:", sd(datos$Edad_Usuario) / mean(datos$Edad_Usuario) * 100, "\n")
-  #Medidas de Tendencia Central del Tiempo Total.
+  #Medidas de TDispersion del Tiempo Total.
   cat("\tTiempo Total\n")
   cat("\t\tEl Rango es:", max(datos$Tiempo_Total, na.rm = TRUE) - min(datos$Tiempo_Total, na.rm = TRUE), "\n")
   cat("\t\tLa Varianza es:", var(datos$Tiempo_Total, na.rm = TRUE), "\n")
@@ -223,19 +225,20 @@ dispersion <- function(datos) {
 }
 
 covarianza<- function (datos){
+  #Importacion de librerias.
   library("nortest")
   library("ggplot2")
   library("ggcorrplot")
-  plot(datos$tiempoTotal~datos$Edad_Usuario, 
+  #Grafica de Dispersion
+  plot(datos$Tiempo_Total~datos$Edad_Usuario, 
        main="Relacion Edad y Tiempo de Uso",
        xlab="Edad Usuario",ylab="Tiempo de Uso",
-       xlim=c(15,80),ylim=c(1,650),xasx="i",yasx="i",col="red",pch=3)
-  
-  qqnorm(datos$Edad_Usuario,col = "steelblue",lwd=2)  #diagrama de dispersión entre las variables
-  qqline(datos$Edad_Usuario,col = "steelblue",lwd=2)  #Valor esperado o media 
-  qqnorm(datos$tiempoTotal,col = "steelblue",lwd=2)  #diagrama de dispersión entre las variables
-  qqline(datos$tiempoTotal,col = "steelblue",lwd=2)  #Valor esperado o media 
-  
+       ylim=c(1,650),xasx="i",yasx="i",col="red",pch=3)
+  #Normalidad de los datos.
+  qqnorm(datos$Edad_Usuario,col = "steelblue",lwd=2)  
+  qqline(datos$Edad_Usuario,col = "steelblue",lwd=2)  
+  qqnorm(datos$Tiempo_Total,col = "steelblue",lwd=2)  
+  qqline(datos$Tiempo_Total,col = "steelblue",lwd=2)   
 }
 
 main()

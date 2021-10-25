@@ -1,3 +1,5 @@
 *.zip
 all_data.csv
+.RData
+.Rhistory
 
