@@ -222,7 +222,6 @@ dispersion <- function(datos) {
   cat("\t\tEl Coeficiente es:", sd(datos$Tiempo_Total) / mean(datos$Tiempo_Total) * 100, "\n")
 }
 
-
 covarianza<- function (datos){
   library("nortest")
   library("ggplot2")
@@ -238,4 +237,5 @@ covarianza<- function (datos){
   qqline(datos$tiempoTotal,col = "steelblue",lwd=2)  #Valor esperado o media 
   
 }
+
 main()
