@@ -205,7 +205,19 @@ posicion <- function(datos) {
 }
 
 dispersion <- function(datos) {
+  data<-c(datos$Edad_Usuario)
+  data<-sort(data)
+  desviacionEdad<-sd(data)
+  varianzaEdad<-sd(data)**2
+  coefVariacionEdad<-(desviacionEdad*100)/mean(data)
+  rangoVariacionEdad<- which.max(data,value = T) - which.min(data,value = T)
   
+  data1<-c(datos$tiepoTotal)
+  data1<-sort(data1)
+  desviacionTiempo<-sd(data1)
+  varianzaTiempo<-sd(data1)**2
+  coefVariacionTiempo<-(desviacionTiempo*100)/mean(data1)
+  rangoVariacionTiempo<-  which.max(data1,value = T) - which.min(data1,value = T)
 }
 
 
