@@ -6,11 +6,11 @@ main <- function() {
   #Obtencion de datos derivados dentro de la limpieza.
   datos <- calculoTiempo(datos)
   #Tabulamos datos los datos obtenidos.
-  # View(datos)
+  View(datos)
   #Informacion de la estructura de los datos.
   info_datos(datos)
   #Graficamos datos individuales.
-  # histogramas(datos)
+  histogramas(datos)
   #Obtencion datos estadísticos.
     #Descripcion datos categoricos.
   descripcion(datos)
@@ -20,8 +20,10 @@ main <- function() {
   posicion(datos)
     #Medidas de dispersion.
   dispersion(datos)
-  #Grafica Dispersion
-  covarianza(datos)
+  #Grafica Dispersion.
+  normalidad(datos)
+  #Obtencion Modelo.
+  modelo(datos)
 }
 
 obtencion_datos <- function() {
@@ -224,21 +226,44 @@ dispersion <- function(datos) {
   cat("\t\tEl Coeficiente es:", sd(datos$Tiempo_Total) / mean(datos$Tiempo_Total) * 100, "\n")
 }
 
-covarianza<- function (datos){
+normalidad<- function (datos){
   #Importacion de librerias.
   library("nortest")
   library("ggplot2")
   library("ggcorrplot")
-  #Grafica de Dispersion
-  plot(datos$Tiempo_Total~datos$Edad_Usuario, 
-       main="Relacion Edad y Tiempo de Uso",
-       xlab="Edad Usuario",ylab="Tiempo de Uso",
-       ylim=c(1,650),xasx="i",yasx="i",col="red",pch=3)
   #Normalidad de los datos.
-  qqnorm(datos$Edad_Usuario,col = "steelblue",lwd=2)  
-  qqline(datos$Edad_Usuario,col = "steelblue",lwd=2)  
-  qqnorm(datos$Tiempo_Total,col = "steelblue",lwd=2)  
-  qqline(datos$Tiempo_Total,col = "steelblue",lwd=2)   
+  print("Normalidad de los datos")
+  cat("\tTiempo Total\n")
+  print(lillie.test(datos$Tiempo_Total))  #No es distribucion normal.
+  cat("\tEdad Usuario\n")
+  print(lillie.test(datos$Edad_Usuario)) #No es distribucion normal.
+  #Grafica de Dispersion.
+  plot(datos$Tiempo_Total~datos$Edad_Usuario, 
+       main = "Relacion Edad y Tiempo de Uso",
+       xlab = "Edad Usuario", ylab = "Tiempo de Uso",
+       xlim = c(15,80), ylim = c(1,650), xasx = "i", yasx = "i", col = "red", pch = 3)
+  #Normalidad de los datos.
+  qqnorm(datos$Edad_Usuario, col = "steelblue", lwd = 2)  
+  qqline(datos$Edad_Usuario, col = "steelblue", lwd = 2)  
+  qqnorm(datos$Tiempo_Total, col = "steelblue", lwd = 2)  
+  qqline(datos$Tiempo_Total, col = "steelblue", lwd = 2)  
+  #Importamos libreria.
+  library(psych)
+  data <- data.frame(datos$Edad_Usuario, datos$Tiempo_Total)
+  pairs.panels(data, method = "spearman")
+  #Coeficiente de Correlacion.
+  coeR <- cor(data, method = "spearman") 
+    print(coeR)
+}
+
+modelo <- function(datos) {4
+  modelo <- lm(datos$Tiempo_Total~datos$Edad_Usuario)
+  print("Modelo de Regresion Lineal")
+  print(summary(modelo))
+  #Generamos la grafica.
+  grafica = ggplot(data = datos, aes(x = Edad_Usuario, y = Tiempo_Total))
+  #Grafica con el modelo.
+  plot(grafica + geom_point() + geom_smooth(method = "lm", color = "green"))
 }
 
 main()
