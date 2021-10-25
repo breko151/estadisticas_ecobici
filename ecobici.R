@@ -11,7 +11,7 @@ main <- function() {
   info_datos(datos)
   #Graficamos datos individuales.
   histogramas(datos)
-  #Obtencion datos estadísticos.
+  #Obtencion datos estadisticos.
     #Descripcion datos categoricos.
   descripcion(datos)
     #Medidas de tendencia central.
@@ -20,7 +20,7 @@ main <- function() {
   posicion(datos)
     #Medidas de dispersion.
   dispersion(datos)
-  #Grafica Dispersion.
+  #Grafica Dispersio, pruebas de normalidad, covarianza y correlacion.
   normalidad(datos)
   #Obtencion Modelo.
   modelo(datos)
@@ -252,8 +252,24 @@ normalidad<- function (datos){
   data <- data.frame(datos$Edad_Usuario, datos$Tiempo_Total)
   pairs.panels(data, method = "spearman")
   #Coeficiente de Correlacion.
+  print("Coeficiente de Correlacion")
   coeR <- cor(data, method = "spearman") 
-    print(coeR)
+  print(coeR)
+  #Coeficiente de Covarianza.
+  print("Coeficiente de Covarianza")
+  covarianza <- cov(data)
+  print(covarianza) 
+  #Si covarianza es positiva hay relacion directa entre las variables.
+  #Si covarianza es negativa hay relacion inversa entre las variables.
+  #Si covarianza es cero no hay relacion  entre las variables.
+  
+  #+- 0.00 +-0.09 Correlacion nula.
+  #+- 0.10 +-0.19 Correlacion muy debil.
+  #+- 0.20 +-0.49 Correlacion debil.
+  #+- 0.50 +-0.69 Correlacion moderada.
+  #+- 0.70 +-0.84 Correlacion significativa.
+  #+- 0.85 +-0.95 Correlacion fuerte.
+  #+- 0.96 +-1.0 Correlacion perfecta.
 }
 
 modelo <- function(datos) {4
