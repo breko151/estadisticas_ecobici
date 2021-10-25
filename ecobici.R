@@ -242,9 +242,9 @@ normalidad<- function (datos){
   
   library(psych)
   data<-data.frame(datos$Edad_Usuario,datos$tiempoTotal)
-  pairs.panels(data,method = "kendall")
+  pairs.panels(data,method = "spearman")
   
-  coeR <- cor(data,method = "kendall") #coeficiente de correlación 
+  coeR <- cor(data,method = "spearman") #coeficiente de correlación 
     print(coeR)
 }
 main()
