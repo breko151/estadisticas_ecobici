@@ -20,6 +20,8 @@ main <- function() {
   posicion(datos)
     #Medidas de dispersion.
   # dispersion(datos)
+    #Pruebas de normalidad covarianza y correlacion 
+  #normalidad(datos)
 }
 
 obtencion_datos <- function() {
