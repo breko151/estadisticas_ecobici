@@ -17,7 +17,7 @@ main <- function() {
     #Medidas de tendencia central.
   tendencia_central(datos)
     #Medidas de posicion.
-  # posicion(datos)
+  posicion(datos)
     #Medidas de dispersion.
   # dispersion(datos)
 }
@@ -180,6 +180,32 @@ tendencia_central <- function(datos) {
   cat("\t\tLa Media es:", mean(datos$Tiempo_Total, na.rm = TRUE), "\n")
   cat("\t\tLa Mediana es:", median(datos$Tiempo_Total, na.rm = TRUE), "\n")
   cat("\t\tLa Moda es:", mfv(datos$Tiempo_Total), "\n")
+}
+
+posicion <- function(datos) {
+  #Importamos la libreria modeest.
+  library(modeest)
+  print("Medidas de Posicion")
+  #Medidas de Tendencia Central de Edad Usuario.
+  cat("\tEdad del Usuario\n")
+  cat("\t\tLos Cuartiles son:\n")
+  print(quantile(datos$Edad_Usuario, prob=c(0,0.25,0.5,0.75,1)))
+  cat("\t\tLos Deciles son:\n")
+  print(quantile(datos$Edad_Usuario, prob=seq(0, 1, length = 11)))
+  cat("\t\tLos Centiles son\n:")
+  print(quantile(datos$Edad_Usuario, prob=seq(0, 1, length = 101)))
+  #Medidas de Tendencia Central del Tiempo Total.
+  cat("\tTiempo Total\n")
+  cat("\t\tLos Cuartiles son:\n")
+  print(quantile(datos$Tiempo_Total, prob=c(0,0.25,0.5,0.75,1)))
+  cat("\t\tLos Deciles son:\n")
+  print(quantile(datos$Tiempo_Total, prob=seq(0, 1, length = 11)))
+  cat("\t\tLos Centiles son:\n")
+  print(quantile(datos$Tiempo_Total, prob=seq(0, 1, length = 101)))
+}
+
+dispersion <- function(datos) {
+  
 }
 
 main()
