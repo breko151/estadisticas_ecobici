@@ -6,12 +6,20 @@ main <- function() {
   #Obtencion de datos derivados dentro de la limpieza.
   datos <- calculoTiempo(datos)
   #Tabulamos datos los datos obtenidos.
-  View(datos)
+  # View(datos)
   #Informacion de la estructura de los datos.
   info_datos(datos)
   #Graficamos datos individuales.
-  histogramas(datos)
-  
+  # histogramas(datos)
+  #Obtencion datos estadísticos.
+    #Descripcion datos categoricos.
+  descripcion(datos)
+    #Medidas de tendencia central.
+  tendencia_central(datos)
+    #Medidas de posicion.
+  # posicion(datos)
+    #Medidas de dispersion.
+  # dispersion(datos)
 }
 
 obtencion_datos <- function() {
@@ -118,12 +126,60 @@ histogramas <- function(datos) {
        main = "Histograma Tiempo Viaje",
        ylab = "Frecuencia",
        xlab = "Minutos",
-       xlim = 1000,
        col = rainbow(32),
        args.legend = list(x = "top"))
 }
 
+descripcion <- function(datos) {
+  print("Descripcion Datos Categoricos")
+  #Descripcion Genero Usuario.
+  cat("\tGenero Usuario\n")
+  genero <- datos$Genero_Usuario
+  numHombres <- sum(genero == "M")
+  numMujeres <- sum(genero == "F")
+  cat("\t\tNumero de hombres: ", numHombres, "\n")
+  cat("\t\tNumero de mujeres: ", numMujeres, "\n")
+  #Descripcion Hora Retiro.
+  cat("\tHora Retiro\n")
+  Ho_R <- datos$Hora_Retiro
+  print(summary(Ho_R))
+  #Descripcion Hora Arribo.
+  cat("\tHora Arribo\n")
+  Ho_A <- datos$Hora_Arribo
+  print(summary(Ho_A))
+  #Descripcion Fecha Retiro.
+  cat("\tFecha Retiro\n")
+  Fe_R <- datos$Fecha_Retiro
+  print(summary(Fe_R))
+  #Descripcion Fecha Arribo.
+  cat("\tFecha Arribo\n")
+  Fe_A <- datos$Fecha_Arribo
+  print(summary(Fe_A))
+  #Descripcion Numero Bicicleta.
+  cat("\tBicicleta\n")
+  print(summary(datos$Bici))
+  #Descripcion Estacion Retiro.
+  cat("\tEstacion Retito\n")
+  print(summary(datos$Ciclo_Estacion_Retiro))
+  #Descripcion Estacion Arribo.
+  cat("\tEstacion Arribo\n")
+  print(summary(datos$Ciclo_Estacion_Arribo))
+}
 
-
+tendencia_central <- function(datos) {
+  #Importamos la libreria modeest.
+  library(modeest)
+  print("Medidas de Tendencia Central")
+  #Medidas de Tendencia Central de Edad Usuario.
+  cat("\tEdad del Usuario\n")
+  cat("\t\tLa Media es:", mean(datos$Edad_Usuario, na.rm = TRUE), "\n")
+  cat("\t\tLa Mediana es:", median(datos$Edad_Usuario, na.rm = TRUE), "\n")
+  cat("\t\tLa Moda es:", mfv(datos$Edad_Usuario), "\n")
+  #Medidas de Tendencia Central del Tiempo Total.
+  cat("\tTiempo Total\n")
+  cat("\t\tLa Media es:", mean(datos$Tiempo_Total, na.rm = TRUE), "\n")
+  cat("\t\tLa Mediana es:", median(datos$Tiempo_Total, na.rm = TRUE), "\n")
+  cat("\t\tLa Moda es:", mfv(datos$Tiempo_Total), "\n")
+}
 
 main()
