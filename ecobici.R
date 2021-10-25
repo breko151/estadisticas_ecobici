@@ -244,7 +244,19 @@ normalidad<- function (datos){
   data<-data.frame(datos$Edad_Usuario,datos$tiempoTotal)
   pairs.panels(data,method = "spearman")
   
-  coeR <- cor(data,method = "spearman") #coeficiente de correlación 
-    print(coeR)
+  covarianza <- cov(data)
+  print(covarianza) #  si covarianza es positiva hay relación directa entre las variables
+                    #  si covarianza es negativa hay relación inversa entre las variables
+                    #  si covarianza es cero no hay relación  entre las variables
+  
+  coefCorrelacion <- cor(data,method = "spearman") #coeficiente de correlación 
+    print(coefCorrelacion)
+  #+- 0.00 +-0.09 Correlación nula
+  #+- 0.10 +-0.19 Correlación muy débil
+  #+- 0.20 +-0.49 Correlación débil
+  #+- 0.50 +-0.69 Correlación moderada
+  #+- 0.70 +-0.84 Correlación significativa
+  #+- 0.85 +-0.95 Correlación fuerte
+  #+- 0.96 +-1.0 Correlación perfecta
 }
 main()
