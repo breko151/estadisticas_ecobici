@@ -19,7 +19,7 @@ main <- function() {
     #Medidas de posicion.
   posicion(datos)
     #Medidas de dispersion.
-  # dispersion(datos)
+  dispersion(datos)
 }
 
 obtencion_datos <- function() {
@@ -205,7 +205,21 @@ posicion <- function(datos) {
 }
 
 dispersion <- function(datos) {
-  
+  #Importamos la libreria modeest.
+  library(modeest)
+  print("Medidas de Dispersion")
+  #Medidas de Tendencia Central de Edad Usuario.
+  cat("\tEdad del Usuario\n")
+  cat("\t\tEl Rango es:", max(datos$Edad_Usuario, na.rm = TRUE) - min(datos$Edad_Usuario, na.rm = TRUE), "\n")
+  cat("\t\tLa Varianza es:", var(datos$Edad_Usuario, na.rm = TRUE), "\n")
+  cat("\t\tLa Desviacion Estandar es:", sd(datos$Edad_Usuario, na.rm = TRUE), "\n")
+  cat("\t\tEl Coeficiente es:", sd(datos$Edad_Usuario) / mean(datos$Edad_Usuario) * 100, "\n")
+  #Medidas de Tendencia Central del Tiempo Total.
+  cat("\tTiempo Total\n")
+  cat("\t\tEl Rango es:", max(datos$Tiempo_Total, na.rm = TRUE) - min(datos$Tiempo_Total, na.rm = TRUE), "\n")
+  cat("\t\tLa Varianza es:", var(datos$Tiempo_Total, na.rm = TRUE), "\n")
+  cat("\t\tLa Desviacion Estandar es:", sd(datos$Tiempo_Total, na.rm = TRUE), "\n")
+  cat("\t\tEl Coeficiente es:", sd(datos$Tiempo_Total) / mean(datos$Tiempo_Total) * 100, "\n")
 }
 
 main()
