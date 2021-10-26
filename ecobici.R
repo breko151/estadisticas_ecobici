@@ -203,7 +203,7 @@ posicion <- function(datos) {
   print(quantile(datos$Edad_Usuario, prob=seq(0, 1, length = 11)))
   cat("\t\tLos Centiles son\n:")
   print(quantile(datos$Edad_Usuario, prob=seq(0, 1, length = 101)))
-  #Medidas de Tendencia Central del Tiempo Total.
+  #Medidas de posicion del Tiempo Total.
   cat("\tTiempo Total\n")
   cat("\t\tLos Cuartiles son:\n")
   print(quantile(datos$Tiempo_Total, prob=c(0,0.25,0.5,0.75,1)))
