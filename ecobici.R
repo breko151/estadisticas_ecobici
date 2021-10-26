@@ -195,7 +195,7 @@ posicion <- function(datos) {
   #Importamos la libreria modeest.
   library(modeest)
   print("Medidas de Posicion")
-  #Medidas de Tendencia Central de Edad Usuario.
+  #Medidas de posicion de Edad Usuario.
   cat("\tEdad del Usuario\n")
   cat("\t\tLos Cuartiles son:\n")
   print(quantile(datos$Edad_Usuario, prob=c(0,0.25,0.5,0.75,1)))
